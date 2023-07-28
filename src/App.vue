@@ -1,26 +1,54 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app">
+    <app-header/>
+    <div class="content">
+      <div class="sidebar">
+        <app-searchbox />
+        <app-basic/>
+      </div>
+      <app-detail/>
+    </div>
+    <app-footer/>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import appHeader from './views/AppHeader.vue'
+import appFooter from './views/AppFooter.vue'
+import appSearchBox from './views/AppSearchBox.vue'
+import appBasic from './views/AppBasic.vue'
+import appDetail from './views/AppDetail.vue'
+
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
+  components:{
+    'app-header' : appHeader,
+    'app-searchbox' : appSearchBox,
+    'app-basic' : appBasic,
+    'app-detail' : appDetail,
+    'app-footer' : appFooter,
+  },
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+html,body{
+  margin: 0;
+  height: 100vh;
 }
+#app{
+  height: 100%;
+}
+.content{
+  display: flex;
+  height: 92%;
+}
+.sidebar{
+  width: 30rem;
+  border-right:1rem black double;
+  height: 200vh;
+  display: flex;
+  flex-direction: column;
+}
+
 </style>
