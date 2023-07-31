@@ -8,7 +8,56 @@ export default createStore({
     searchNum: '',
     findAll: [],
     // findOne: []
-    types: []
+    types: [
+    {
+      name:'All' ,
+      color: '#000000'
+    }, {
+      name: 'grass',
+      color: '#B2FA5C'
+    },{
+      name:'fire',
+      color:'#FF0000'
+    },{
+      name:'water',
+      color:'#B4E5FF'
+    },{
+      name:'bug',
+      color: '#FFB182'
+    },{
+      name: 'poison',
+      color: '#9905D8'
+    },{
+      name: 'electric',
+      color: '#FFEB5A	'
+    },{
+      name: 'ground',
+      color: '#C39873'
+    },{
+      name: 'fairy',
+      color: '#FFAAF5'
+    },{
+      name: 'fighting',
+      color: '#EBA55A'
+    },{
+      name: 'psychic',
+      color: '#46649B'
+    },{
+      name: 'rock',
+      color: '#aaaaaa'
+    },{
+      name: 'ghost',
+      color: ''
+    },{
+      name: 'ice',
+      color: '#61F3EB	'
+    },{
+      name: 'dragon',
+      color: '#FF8282'
+    },
+  ],
+    findTypes :[]
+  
   },
   
   mutations: {
@@ -30,23 +79,44 @@ export default createStore({
     //   })
     //   console.log('findOne:',state.findOne);
     // },
-     
+
+    // resetSearchNum(state){
+    //   state.searchNum = ''
+    // },
+    getTypeMember : function(state,typeName){
+      console.log('getTypeMember 들어옴,선택타입:',typeName);
+      const max = 300;
+      var emptyTypes = [];
+      
+      for(let index=0;index<max;index++){
+        if(state.findAll[index].types[0].type.name ==typeName){
+          emptyTypes.push(state.findAll[index])
+        }
+      }
+      state.findTypes = emptyTypes;
+      console.log(state.findTypes);
+    },
+    // resetFindTypes(state){
+    //   state.findTypes = []
+    // }
   },   
 
   actions: {
     getListAll : async function(){
       console.log('getlistAll 들어옴');
       const max = 300;
-      const uniqueTypes = new Set(); // 중복을 제거할 Set 객체 생성
+      // const uniqueTypes = new Set(); // 중복을 제거할 Set 객체 생성
 
       for(let index=1;index<=max;index++){
         const response = (await axios.get(`https://pokeapi.co/api/v2/pokemon/${index}`)).data
         this.state.findAll.push(response)
         // console.log(response.types[0].type.name);
-        uniqueTypes.add(response.types[0].type.name)
-        this.state.types = Array.from(uniqueTypes);
+        // uniqueTypes.add(response.types[0].type.name)
+        // this.state.types = Array.from(uniqueTypes);
       }
-    }
+      console.log(this.state.findAll);
+      console.log('END');
+    },
   },
 
   getters: {
@@ -69,6 +139,12 @@ export default createStore({
       console.log('getTypes');
       // console.log(state.types);
       return state.types
+    },
+
+    getFindTypes(state){
+      console.log('findTypes');
+      // console.log(state.findTypes);
+      return state.findTypes
     }
   }
 });

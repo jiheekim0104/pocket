@@ -1,23 +1,24 @@
 <template>
-  <div>
+
     <div v-if="this.getSearchNum==''" class="nothing">
-    아무것도 입력하지 않았을때 
-     
-         {{ this.getTypes }}
-     
+    <!-- {{ this.getTypes }} -->
+    <div class="typeBtn" v-for="type in this.getTypes" :key="type" 
+    v-on:click="search(type.name)" :style="{backgroundColor: type.color}">
+      {{ type.name }}
+    </div> 
     </div>
     <div v-if="this.getSearchNum!=''" class="basic" >
-      <img class="front_default" :src="[this.getAll[this.getSearchNum].sprites.other.home.front_default]"><br>
+      <img class="front_default" :src="[this.getAll[this.getSearchNum-1].sprites.other.home.front_default]"><br>
       <div class="infoBox">
         <div class="name">번호</div>
-        <span>{{ this.getAll[this.getSearchNum].id }}</span>
+        <span>{{ this.getAll[this.getSearchNum-1].id }}</span>
       </div>
       <div class="infoBox">
         <div class="name">이름</div>
-        <span>{{ this.getAll[this.getSearchNum].name }}</span>
+        <span>{{ this.getAll[this.getSearchNum-1].name }}</span>
       </div>
     </div>
-  </div>
+
   
 
 </template>
@@ -38,6 +39,12 @@ export default {
       console.log('searchAll 들어옴');
       this.$store.dispatch('getListAll')
     },
+    search(typeName){
+      // 속성 클릭
+        console.log('type search 들어옴');
+        console.log(typeName); 
+        this.$store.commit('getTypeMember',typeName)
+      }
   },
 }
 
@@ -46,20 +53,24 @@ export default {
 
 <style scoped>
 .nothing{
-  text-align: center;
+width: 20rem;
+margin: 1.5rem auto 0 auto;
 }
 .typeBtn{
   background-color: rgb(51,104,176);
   height: 1.4rem;
-  width: 3.5rem;
-  margin: 0.17rem 0.4rem 0.17rem auto;
+  width: 4rem;
+  margin: 0;
+  float: left;
   border-radius: 2rem;
   font-size: 0.9rem;
   font-weight: bolder;
   text-align: center;
   color: white;
+  margin: 1rem 0.5rem 0 0.4rem;
   padding-top: 0.1rem;
 }
+
 .basic {
   /* border: 1px solid darkorange; */
   height: 100%;
