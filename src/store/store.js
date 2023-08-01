@@ -5,6 +5,7 @@ import axios from 'axios'
 
 export default createStore({
   state: {
+    isLoading: true, 
     searchNum: '',
     findAll: [],
     // findOne: []
@@ -114,12 +115,19 @@ export default createStore({
         // uniqueTypes.add(response.types[0].type.name)
         // this.state.types = Array.from(uniqueTypes);
       }
+      this.state.isLoading = false;
       console.log(this.state.findAll);
       console.log('END');
+      console.log(this.state.isLoading);
     },
   },
 
   getters: {
+    getIsLoading(state){
+      console.log('getIsLoading');
+      console.log('isLoading',state.isLoading);
+      return state.isLoading
+    },
     // getOne(state){
     //   console.log('getOne');
     //   console.log(state.findOne[0]);

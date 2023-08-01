@@ -31,14 +31,7 @@ export default {
   computed:{
     ...mapGetters(['getSearchNum','getAll','getTypes']),
   },
-  mounted() {
-    this.searchAll(); // 화면이 나타남과 동시에 searchAll() 메서드를 호출
-  },
   methods : {
-    searchAll(){
-      console.log('searchAll 들어옴');
-      this.$store.dispatch('getListAll')
-    },
     search(typeName){
       // 속성 클릭
         console.log('type search 들어옴');
@@ -72,9 +65,7 @@ margin: 1.5rem auto 0 auto;
 }
 
 .basic {
-  /* border: 1px solid darkorange; */
-  height: 100%;
-  padding: 1rem;
+  padding: 1rem 1rem 25rem 1rem;
 }
 
 .front_default {

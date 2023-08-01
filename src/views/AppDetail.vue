@@ -1,7 +1,6 @@
 <template>
-  
-  <div v-if="this.getSearchNum == ''&&this.getFindTypes.length==0">
-    <div class="img_Box" >
+  <div class="detail" v-if="this.getSearchNum == ''&&this.getFindTypes.length==0">
+    <div class="img_Box">
       <div class="singleImg" v-for="(getOne, index) in this.getAll" :key="index" >
           <img class="front_default" :src="[getOne.sprites.other.dream_world.front_default]" v-on:click="search(getOne.id)">
           <br>
@@ -50,9 +49,6 @@ export default {
     toFixed: function (value) {
       return `${value.toFixed(1)}`
     },
-    // resetFindTypes() {
-    //   this.$store.commit('resetFindTypes');
-    // },
     search: function(value){
       console.log('search',value);
       this.$store.commit('getInputValue',value)
@@ -65,9 +61,12 @@ export default {
 </script>
 
 <style scoped>
-div {
-  /* border: 1px solid plum; */
+.detail {
   width: 100%;
+  /* background-image: url(../assets/Natural_Green_Berry_Tree.png); */
+  background-attachment: fixed;
+  background-size: cover;
+
 }
 
 .img_Box {
@@ -75,6 +74,11 @@ div {
   flex-wrap:wrap; 
 }
 
+.img_Box>img{
+  display: flex;
+  z-index: 0;
+  opacity: 0.5;
+}
 .index0{
   display: none;
 }
